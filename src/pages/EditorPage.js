@@ -92,18 +92,22 @@ const EditorPage = () => {
     }
 
     return (
-        <div className="mainWrap">
+        <div className="mainWrap font-mono">
             <div className="aside">
+                <h1 className='logo' >LIVE CODE EDITOR</h1>
                 <div className="asideInner">
-                    <h3>Connected</h3>
-                    <div className="clientsList">
-                        {clients.map((client) => (
-                            <Client
-                                key={client.socketId}
-                                username={client.username}
-                            />
-                        ))}
+                    <div className='participants' >
+                        <h3 className='c-part'>Participants</h3>
+                        <div className="clientsList">
+                            {clients.map((client) => (
+                                <Client
+                                    key={client.socketId}
+                                    username={client.username}
+                                />
+                            ))}
+                        </div>
                     </div>
+
                 </div>
                 <button className="btn copyBtn" onClick={copyRoomId}>
                     Copy ROOM ID

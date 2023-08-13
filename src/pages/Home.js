@@ -1,86 +1,106 @@
-import React, { useState } from 'react';
-import { v4 as uuidV4 } from 'uuid';
-import toast from 'react-hot-toast';
+import React, { useState } from 'react'
+import { v4 as uniqueId } from 'uuid';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 
 const Home = () => {
     const navigate = useNavigate();
 
     const [roomId, setRoomId] = useState('');
-    const [username, setUsername] = useState('');
-    const createNewRoom = (e) => {
+    const [username, setUserName] = useState('');
+
+    const createRoomId = (e) => {
         e.preventDefault();
-        const id = uuidV4();
+        const id = uniqueId();
         setRoomId(id);
-        toast.success('Created a new room');
-    };
+        toast.success('Created a new room!')
+    }
 
-    const joinRoom = () => {
-        if (!roomId || !username) {
-            toast.error('ROOM ID & username is required');
-            return;
+    const joinRoom = (e) => {
+
+        if(!roomId || !username)
+        {
+            toast.error('Fill the complete details')
         }
-
-        // Redirect
-        navigate(`/editor/${roomId}`, {
-            state: {
-                username,
-            },
-        });
-    };
-
-    const handleInputEnter = (e) => {
-        if (e.code === 'Enter') {
+        else
+        {
+            //redirect
+            navigate(`/editor/${ roomId }`,{
+                state: {
+                    username,
+                }
+            });
+        }
+    }
+    const inputEnter = (e) => {
+        console.log(e.code);
+        if(e.code === 'Enter')
+        {
             joinRoom();
         }
-    };
+    }
+
+    console.log(roomId);
     return (
-        <div className="homePageWrapper">
-            <div className="formWrapper">
-                <p className="homePageLogo" >
-                 Collaborative CodeEditor
-                 </p>
-                <h4 className="mainLabel">Paste invitation ROOM ID</h4>
-                <div className="inputGroup">
-                    <input
-                        type="text"
-                        className="inputBox"
-                        placeholder="ROOM ID"
-                        onChange={(e) => setRoomId(e.target.value)}
-                        value={roomId}
-                        onKeyUp={handleInputEnter}
-                    />
-                    <input
-                        type="text"
-                        className="inputBox"
-                        placeholder="USERNAME"
-                        onChange={(e) => setUsername(e.target.value)}
-                        value={username}
-                        onKeyUp={handleInputEnter}
-                    />
-                    <button className="btn joinBtn" onClick={joinRoom}>
-                        Join
-                    </button>
-                    <span className="createInfo">
-                        If you don't have an invite then create &nbsp;
+        <div className="App bg-slate-400 font-mono h-screen flex items-center justify-center">
+            <div className="font-mono font-bold bg-slate-400 hover:bg-slate-500 h-9/12 w-1/3 shadow-3xl hover:shadow-6xl rounded-xl drop-shadow-md">
+                <h1 className='pl-20 py-2 font-mono text-2xl m-0'>Collaborative-code-editor</h1>
+
+                <form className=" shadow-md rounded px-6 pt-2 pb-4">
+                    <div className="mb-4">
+                        <label className="block  text-sm font-bold mb-2" for="username">
+                            Username
+                        </label>
+                        <input
+                            value={username}
+                            onChange={(e) => { setUserName(e.target.value) }}
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="username"
+                            type="text"
+                            placeholder="Username"
+                            autoComplete='off'
+                            onKeyUp={inputEnter}
+                            >
+                            </input>
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-sm font-bold mb-2" for="room-id">
+                            Room ID
+                        </label>
+                        <input
+                            className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+
+                            value={roomId}
+                            onChange={(e) => { setRoomId(e.target.value) }}
+                            type="text"
+                            placeholder="******************"
+                            
+                            onKeyUp={inputEnter}
+                            ></input>
+                        {/* <p className="text-red-500 text-xs italic">Please choose a password.</p> */}
+                    </div>
+                    <div className="flex items-center justify-between">
+
                         <a
-                            onClick={createNewRoom}
-                            href=""
-                            className="createNewBtn"
-                        >
+                            href="/#"
+                            onClick={createRoomId}
+                            className="inline-block align-baseline underline font-bold text-md pl-2 text-white hover:text-blue-300"
+                            >
                             new room
                         </a>
-                    </span>
-                </div>
+
+                        <button 
+                        onClick={joinRoom}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                        type="button">
+                            JOIN
+                        </button>
+                    </div>
+                </form>
             </div>
-            <footer>
-                <h4>
-                    Built with ❤️&nbsp; by &nbsp;
-                    <a href="https://github.com/TMahato">TMahato</a>
-                </h4>
-            </footer>
         </div>
-    );
-};
+    )
+}
 
 export default Home;
