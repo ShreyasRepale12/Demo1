@@ -94,7 +94,7 @@ const EditorPage = () => {
     return (
         <div className="mainWrap font-mono">
             <div className="aside">
-                <h1 className='logo' >LIVE CODE EDITOR</h1>
+                <h1 className='logo' >Interview-Fit</h1>
                 <div className="asideInner">
                     <div className='participants' >
                         <h3 className='c-part'>Participants</h3>
