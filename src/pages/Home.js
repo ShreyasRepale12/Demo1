@@ -45,7 +45,7 @@ const Home = () => {
     return (
         <div className="App bg-slate-400 font-mono h-screen flex items-center justify-center">
             <div className="font-mono font-bold bg-slate-400 hover:bg-slate-500 h-9/12 w-1/3 shadow-3xl hover:shadow-6xl rounded-xl drop-shadow-md">
-                <h1 className='pl-20 py-2 font-mono text-2xl m-0'>Interview-Fit</h1>
+                <h1 className='pl-36 py-2 font-mono text-2xl m-0'>Interview-Fit</h1>
 
                 <form className=" shadow-md rounded px-6 pt-2 pb-4">
                     <div className="mb-4">
